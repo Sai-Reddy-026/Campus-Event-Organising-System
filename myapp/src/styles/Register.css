@@ -1,0 +1,78 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+
+body, html { height:100vh; background:#020d18; }
+
+.background span { position:absolute; width:2px; height:100vh; background:linear-gradient(transparent,#00eaff,transparent); animation:move 6s linear infinite; opacity:0.7; }
+.background span:nth-child(1){left:10%} .background span:nth-child(2){left:20%}
+.background span:nth-child(3){left:30%} .background span:nth-child(4){left:40%}
+.background span:nth-child(5){left:50%} .background span:nth-child(6){left:60%}
+.background span:nth-child(7){left:70%} .background span:nth-child(8){left:80%}
+
+.background span:nth-child(odd){animation-duration:4s}
+.background span:nth-child(even){animation-duration:7s}
+
+@keyframes move { from{transform:translateY(-100%)} to{transform:translateY(100%)} }
+
+.register-box {
+  width:380px; padding:40px; background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px); border-radius:16px; box-shadow:0 0 30px rgba(0,234,255,0.35);
+  color:#fff; position:relative; margin:auto;
+}
+
+.register-box h2 { text-align:center; margin-bottom:25px; }
+
+.input-box { position:relative; margin-bottom:22px; }
+.input-box input { width:100%; padding:10px; background:transparent; border:none; border-bottom:2px solid #00eaff; outline:none; color:#fff; }
+.input-box label { position:absolute; top:50%; left:0; transform:translateY(-50%); color:#aaa; pointer-events:none; transition:0.3s; }
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label { top:-6px; font-size:12px; color:#00eaff; }
+
+button { width:100%; padding:12px; border:none; border-radius:25px; background:#00eaff; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; margin-top:10px; }
+button:hover { box-shadow:0 0 20px #00eaff; }
+
+.login-link { margin-top:15px; text-align:center; font-size:14px; }
+.login-link a { color:#00eaff; text-decoration:none; }
+/* Container for side-by-side buttons */
+.role-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* Individual Role Cards */
+.role-card {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+/* Hover effect */
+.role-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Active State (When Selected) */
+.role-card.active {
+  background: #0ef; /* Neon color to match your theme */
+  color: #000;
+  border-color: #0ef;
+  box-shadow: 0 0 15px #0ef;
+}
+
+/* Ensure the register box is wide enough for side-by-side */
+.register-box {
+  width: 400px;
+  padding: 40px;
+  /* ... rest of your existing register-box styles ... */
+}
