@@ -5,24 +5,27 @@ import "../styles/Login.css";
 
 function Login() {
   const navigate = useNavigate(); 
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); // This holds the ID (Roll No or Emp ID)
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student"); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // SENDING: identifier, password, and role
       const res = await axios.post("http://127.0.0.1:5000/api/auth/login", { 
-        username, 
+        identifier: username, 
         password,
         role 
       });
 
       if (res.status === 200) {
         alert(`${role.charAt(0).toUpperCase() + role.slice(1)} login successful!`);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
         
-        // Redirect based on the chosen role
+        // Save user details to local storage
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        // Role-based redirection
         if (role === "faculty") {
           navigate("/faculty-home");
         } else {
@@ -46,7 +49,6 @@ function Login() {
       <div className="login-box">
         <h2>Login</h2>
 
-        {/* SIDE-BY-SIDE ROLE SELECTION */}
         <div className="role-container">
           <div 
             className={`role-card ${role === "student" ? "active" : ""}`} 
@@ -70,7 +72,8 @@ function Login() {
               required 
               placeholder=" " 
             />
-            <label>Username</label>
+            {/* Dynamic label shows exactly what the user should enter */}
+            <label>{role === "faculty" ? "Employee ID" : "Roll Number"}</label>
           </div>
 
           <div className="input-box">
@@ -86,10 +89,6 @@ function Login() {
 
           <button type="submit">Login</button>
         </form>
-
-        <p className="register">
-          Don’t have an account? <Link to="/register">Register</Link>
-        </p>
       </div>
     </>
   );
