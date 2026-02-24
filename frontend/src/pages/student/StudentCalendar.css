@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════
+   CEMS Page Styles - Clean centered layout
+   ═══════════════════════════════════════════════════ */
+
+.cems-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cems-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cems-event-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    cursor: default;
+}
+
+.cems-event-item:hover {
+    transform: translateY(-2px);
+}
+
+.cems-event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 56px;
+    padding: 10px;
+    border-radius: var(--radius-md);
+    background: var(--primary-50);
+    color: var(--primary-700);
+}
+
+[data-theme="dark"] .cems-event-date {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--primary-400);
+}
+
+.cems-date-day {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cems-date-month {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.cems-event-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.cems-event-info p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.cems-event-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.cems-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.cems-tag.hackathon {
+    background: rgba(59, 130, 246, 0.12);
+    color: #2563eb;
+}
+
+.cems-tag.games {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+.cems-tag.celebration {
+    background: rgba(139, 92, 246, 0.12);
+    color: #7c3aed;
+}
+
+.cems-tag.type {
+    background: rgba(245, 158, 11, 0.12);
+    color: #d97706;
+}

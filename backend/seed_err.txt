@@ -1,0 +1,57 @@
+﻿Γ£à MongoDB Connected: localhost
+≡ƒî▒ Seeding database...
+node : Γ¥î Seed error: 
+TypeError: next is not 
+a function
+At line:1 char:1
++ node seed.js 2>&1 | 
+Out-File -FilePath 
+seed_err.txt -Encoding 
+utf8
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Γ¥î Seed erro   
+ r:... not a functi    
+on:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+    at 
+model.<anonymous> (C:\a
+msdPro\backend\models\U
+ser.js:63:5)
+    at Kareem.execPre (
+C:\amsdPro\backend\node
+_modules\kareem\index.j
+s:68:39)
+    at process.processT
+icksAndRejections (node
+:internal/process/task_
+queues:105:5)
+    at async 
+model.$__save (C:\amsdP
+ro\backend\node_modules
+\mongoose\lib\model.js:
+371:5)
+    at async 
+model.save (C:\amsdPro\
+backend\node_modules\mo
+ngoose\lib\model.js:614
+:5)
+    at async C:\amsdPro
+\backend\node_modules\m
+ongoose\lib\model.js:27
+50:9
+    at async 
+Promise.all (index 0)
+    at async 
+Function.create (C:\ams
+dPro\backend\node_modul
+es\mongoose\lib\model.j
+s:2735:11)
+    at async seedData (
+C:\amsdPro\backend\seed
+.js:32:23)

@@ -1,0 +1,133 @@
+/* ═══ Letters Page Styles ═══ */
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+}
+
+.letter-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.letter-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 8px;
+}
+
+.letter-event-info {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+    margin-top: 4px;
+}
+
+.letter-student-id {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.letter-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.letter-preview {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-main);
+}
+
+.letter-preview-header {
+    background: linear-gradient(135deg, #0a1628, #1e3a5f);
+    padding: 14px;
+    text-align: center;
+}
+
+.letter-preview-header p {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.letter-preview-header .preview-subtitle {
+    color: #d4a843;
+    font-weight: 500;
+    font-size: 0.72rem;
+    margin-top: 2px;
+}
+
+.letter-preview-body {
+    padding: 14px;
+}
+
+.letter-preview-body p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.letter-card .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.letter-card .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.letter-pending-msg,
+.letter-rejected-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-top: auto;
+}
+
+.letter-pending-msg {
+    background: #fffbeb;
+    color: #f59e0b;
+}
+
+.letter-rejected-msg {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}

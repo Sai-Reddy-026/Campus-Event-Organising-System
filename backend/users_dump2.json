@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "699d4534dc221c1f448d99ac",
+    "name": "Admin User",
+    "email": "admin@college.edu",
+    "password": "admin123",
+    "role": "admin",
+    "referrals": [],
+    "__v": 0
+  },
+  {
+    "_id": "699d4534dc221c1f448d99ae",
+    "name": "Rahul Kumar",
+    "email": "rahul@student.edu",
+    "password": "student123",
+    "role": "student",
+    "referrals": [],
+    "studentId": "STU-000001",
+    "__v": 0
+  },
+  {
+    "_id": "699d4534dc221c1f448d99b1",
+    "name": "Priya Sharma",
+    "email": "priya@student.edu",
+    "password": "student123",
+    "role": "student",
+    "referrals": [
+      "699d4534dc221c1f448d99ae"
+    ],
+    "studentId": "STU-000002",
+    "__v": 1
+  },
+  {
+    "_id": "699d519750fc6def37d164be",
+    "name": "J Sri Raj Kumar",
+    "email": "24B11CS160@adityauniversity.in",
+    "password": "student123",
+    "role": "student",
+    "referrals": [],
+    "studentId": "24B11CS160",
+    "__v": 2
+  },
+  {
+    "_id": "699d580450fc6def37d164bf",
+    "name": "Alice",
+    "email": "alice@gmailcom",
+    "password": "student123",
+    "role": "student",
+    "referrals": [],
+    "studentId": "24B11CS001",
+    "__v": 3
+  }
+]
