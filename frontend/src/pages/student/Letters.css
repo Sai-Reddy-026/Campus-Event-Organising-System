@@ -1,9 +1,9 @@
-/* ═══ Letters Page Styles ═══ */
+/* ─── Premium Letters Page ───────────────────────────────── */
 
 .grid-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
 }
 
 .letter-card {
@@ -11,74 +11,99 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-bounce);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.letter-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 .letter-header h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 800;
     color: var(--text-primary);
     margin-top: 8px;
+    letter-spacing: -0.01em;
 }
 
 .letter-event-info {
-    font-size: 0.82rem;
+    font-size: 14px;
     color: var(--text-secondary);
     text-transform: capitalize;
     margin-top: 4px;
+    font-weight: 500;
 }
 
 .letter-student-id {
-    font-size: 0.78rem;
-    color: var(--accent);
-    font-weight: 600;
+    font-size: 13px;
+    color: var(--primary-600);
+    font-weight: 700;
     margin-top: 4px;
 }
 
 .letter-status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 600;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
     width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .letter-preview {
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    background: var(--bg-main);
+    background: var(--bg-secondary);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .letter-preview-header {
-    background: linear-gradient(135deg, #0a1628, #1e3a5f);
-    padding: 14px;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-main));
+    padding: 16px;
     text-align: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .letter-preview-header p {
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 800;
+    font-size: 14px;
 }
 
 .letter-preview-header .preview-subtitle {
-    color: #d4a843;
-    font-weight: 500;
-    font-size: 0.72rem;
-    margin-top: 2px;
+    background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .letter-preview-body {
-    padding: 14px;
+    padding: 16px;
+    background: var(--bg-main);
 }
 
 .letter-preview-body p {
-    font-size: 0.8rem;
+    font-size: 13px;
     color: var(--text-secondary);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    line-height: 1.6;
 }
 
 .letter-card .btn-primary {
@@ -86,21 +111,22 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.85rem;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 14px;
     border: none;
     cursor: pointer;
     background: linear-gradient(135deg, #10b981, #059669);
     color: #fff;
-    transition: all 0.3s ease;
+    transition: all var(--transition-bounce);
     margin-top: auto;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .letter-card .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
 }
 
 .letter-pending-msg,
@@ -109,21 +135,23 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-size: 0.82rem;
-    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
     margin-top: auto;
 }
 
 .letter-pending-msg {
-    background: #fffbeb;
-    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .letter-rejected-msg {
-    background: #fef2f2;
+    background: rgba(239, 68, 68, 0.1);
     color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 @media (max-width: 768px) {

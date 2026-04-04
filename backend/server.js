@@ -46,7 +46,6 @@ app.use('/api', (req, res) => {
   res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
 
-// ─── Start Server ────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {

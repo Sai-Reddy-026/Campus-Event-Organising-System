@@ -318,7 +318,15 @@ const AdminEvents = () => {
                                     </div>
                                     <div className="form-group">
                                         <label>Date *</label>
-                                        <input className={`form-input ${formErrors.date ? 'input-error' : ''}`} type="date" name="date" value={form.date} onChange={handleChange} required />
+                                        <input
+                                            className={`form-input ${formErrors.date ? 'input-error' : ''}`}
+                                            type="date"
+                                            name="date"
+                                            value={form.date}
+                                            onChange={handleChange}
+                                            min={new Date().toISOString().split('T')[0]}
+                                            required
+                                        />
                                         {formErrors.date && <span className="field-error">{formErrors.date}</span>}
                                     </div>
                                     <div className="form-group">

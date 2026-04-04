@@ -72,9 +72,13 @@ const EventCard = ({ event, onRegister, registrationStatus }) => {
                     <button
                         className="btn btn-primary event-register-btn"
                         onClick={() => onRegister(event)}
-                        disabled={event.booked_slots >= event.total_slots}
+                        disabled={event.registrationClosed || event.booked_slots >= event.total_slots}
                     >
-                        {event.booked_slots >= event.total_slots ? 'Event Full' : 'Register Now'}
+                        {event.registrationClosed
+                            ? 'Registration Closed'
+                            : event.booked_slots >= event.total_slots
+                                ? 'Event Full'
+                                : 'Register Now'}
                     </button>
                 )}
             </div>

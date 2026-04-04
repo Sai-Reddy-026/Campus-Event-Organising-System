@@ -1,8 +1,24 @@
-/* ─── Dashboard Layout ───────────────────────────────────── */
+/* ─── Premium Dashboard Layout ─────────────────────────────── */
 
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
+    background: var(--bg-main);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Global Subtle Grid Pattern Background for Dashboard */
+.dashboard-layout::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .main-content {
@@ -11,30 +27,35 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: margin-left 0.3s ease;
+    transition: margin-left var(--transition-normal);
+    position: relative;
+    z-index: 1;
 }
 
 .content-area {
     flex: 1;
     padding: 0;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 90;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity var(--transition-normal);
 }
 
 .sidebar-overlay.show {
     opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .main-content {
         margin-left: 0;
     }

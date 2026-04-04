@@ -8,20 +8,8 @@ import { useTheme } from '../../context/ThemeContext';
 import api from '../../services/api';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { Bar } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-} from 'chart.js';
-import { FiCalendar, FiUsers, FiAward, FiTrendingUp, FiMoon, FiSun, FiBarChart2, FiZap } from 'react-icons/fi';
+import { FiCalendar, FiUsers, FiAward, FiTrendingUp, FiMoon, FiSun, FiZap } from 'react-icons/fi';
 import './StudentDashboard.css';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
@@ -31,16 +19,14 @@ const StudentDashboard = () => {
     const { theme, toggleTheme } = useTheme();
     const [stats, setStats] = useState(null);
     const [events, setEvents] = useState([]);
-    const [chartData, setChartData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [statsRes, eventsRes, chartRes] = await Promise.all([
+                const [statsRes, eventsRes] = await Promise.all([
                     api.get('/statistics'),
-                    api.get('/events'),
-                    api.get('/statistics/chart')
+                    api.get('/events')
                 ]);
                 setStats(statsRes.data);
 
@@ -53,28 +39,6 @@ const StudentDashboard = () => {
                     borderColor: 'transparent'
                 }));
                 setEvents(calEvents);
-
-                // Chart data
-                if (chartRes.data && chartRes.data.labels) {
-                    const colors = chartRes.data.datasets[0]?.categories?.map(cat =>
-                        cat === 'hackathon' ? 'rgba(59, 130, 246, 0.8)' :
-                            cat === 'game' ? 'rgba(16, 185, 129, 0.8)' :
-                                'rgba(139, 92, 246, 0.8)'
-                    ) || [];
-
-                    setChartData({
-                        labels: chartRes.data.labels,
-                        datasets: [{
-                            label: 'Registrations per Event',
-                            data: chartRes.data.datasets[0]?.data || [],
-                            backgroundColor: colors,
-                            borderColor: colors.map(c => c.replace('0.8', '1')),
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        }]
-                    });
-                }
             } catch (err) {
                 console.error('Dashboard fetch error:', err);
             } finally {
@@ -84,46 +48,6 @@ const StudentDashboard = () => {
         fetchData();
     }, []);
 
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            title: { display: false },
-            tooltip: {
-                backgroundColor: theme === 'dark' ? '#1e293b' : '#ffffff',
-                titleColor: theme === 'dark' ? '#f9fafb' : '#1e293b',
-                bodyColor: theme === 'dark' ? '#94a3b8' : '#475569',
-                borderColor: theme === 'dark' ? '#334155' : '#e2e8f0',
-                borderWidth: 1,
-                cornerRadius: 8,
-                padding: 12,
-                titleFont: { size: 13, weight: 'bold' },
-                bodyFont: { size: 12 }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: theme === 'dark' ? '#94a3b8' : '#64748b',
-                    font: { size: 11 },
-                    maxRotation: 45
-                },
-                grid: { display: false }
-            },
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    color: theme === 'dark' ? '#94a3b8' : '#64748b',
-                    font: { size: 11 },
-                    stepSize: 1
-                },
-                grid: {
-                    color: theme === 'dark' ? 'rgba(148, 163, 184, 0.1)' : 'rgba(0, 0, 0, 0.06)'
-                }
-            }
-        }
-    };
 
     if (loading) {
         return <div className="loading-container"><div className="spinner"></div><p>Loading dashboard...</p></div>;
@@ -201,22 +125,6 @@ const StudentDashboard = () => {
                             dayMaxEvents={2}
                             fixedWeekCount={false}
                         />
-                    </div>
-                </div>
-
-                {/* Right: Registration Statistics Chart */}
-                <div className="glass-card chart-section">
-                    <h3 className="card-title"><FiBarChart2 /> Registration Statistics</h3>
-                    <p className="chart-subtitle">Number of students registered per event</p>
-                    <div className="chart-container">
-                        {chartData && chartData.labels.length > 0 ? (
-                            <Bar data={chartData} options={chartOptions} />
-                        ) : (
-                            <div className="chart-empty">
-                                <FiBarChart2 size={48} />
-                                <p>No registration data yet. Register for events to see statistics!</p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </motion.div>

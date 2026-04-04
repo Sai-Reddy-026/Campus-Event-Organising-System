@@ -4,19 +4,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { FiBell, FiSun, FiMoon, FiUser, FiLogOut, FiMenu } from 'react-icons/fi';
+import { FiBell, FiSun, FiMoon, FiMenu } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import './Navbar.css';
 
 const Navbar = ({ onMenuToggle }) => {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
-    const [showProfile, setShowProfile] = useState(false);
     const [notifications, setNotifications] = useState([]);
     const [showNotif, setShowNotif] = useState(false);
-    const profileRef = useRef(null);
     const notifRef = useRef(null);
 
     // Fetch notifications
@@ -35,7 +33,6 @@ const Navbar = ({ onMenuToggle }) => {
     // Close dropdowns on outside click
     useEffect(() => {
         const handler = (e) => {
-            if (profileRef.current && !profileRef.current.contains(e.target)) setShowProfile(false);
             if (notifRef.current && !notifRef.current.contains(e.target)) setShowNotif(false);
         };
         document.addEventListener('mousedown', handler);
@@ -115,30 +112,6 @@ const Navbar = ({ onMenuToggle }) => {
                     )}
                 </div>
 
-                {/* Profile Dropdown */}
-                <div className="navbar-dropdown" ref={profileRef}>
-                    <button className="profile-btn" onClick={() => setShowProfile(!showProfile)}>
-                        <div className="profile-avatar">
-                            {user?.name?.charAt(0) || 'U'}
-                        </div>
-                    </button>
-                    {showProfile && (
-                        <div className="dropdown-menu profile-dropdown">
-                            <div className="profile-info">
-                                <div className="profile-avatar-lg">{user?.name?.charAt(0) || 'U'}</div>
-                                <div>
-                                    <h4>{user?.name}</h4>
-                                    <p>{user?.email}</p>
-                                    <span className="role-badge">{user?.role}</span>
-                                </div>
-                            </div>
-                            <div className="dropdown-divider"></div>
-                            <button className="dropdown-item" onClick={handleLogout}>
-                                <FiLogOut /> Logout
-                            </button>
-                        </div>
-                    )}
-                </div>
             </div>
         </header>
     );

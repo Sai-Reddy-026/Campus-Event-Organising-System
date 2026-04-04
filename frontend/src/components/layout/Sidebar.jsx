@@ -8,7 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
     FiHome, FiCalendar, FiCode, FiAward, FiMusic,
     FiFileText, FiUsers, FiLogOut,
-    FiChevronLeft, FiChevronRight, FiBarChart2
+    FiChevronLeft, FiChevronRight, FiBarChart2, FiUser
 } from 'react-icons/fi';
 import './Sidebar.css';
 
@@ -35,10 +35,10 @@ const Sidebar = () => {
         { to: '/admin/dashboard', icon: <FiHome />, label: 'Dashboard' },
         { to: '/admin/events', icon: <FiCalendar />, label: 'Manage Events' },
         { to: '/admin/approvals', icon: <FiUsers />, label: 'Approvals' },
-        { to: '/admin/analytics', icon: <FiBarChart2 />, label: 'Analytics' },
     ];
 
     const links = user?.role === 'admin' ? adminLinks : studentLinks;
+    const profileRoute = user?.role === 'admin' ? '/admin/profile' : '/student/profile';
 
     return (
         <motion.aside
@@ -93,8 +93,27 @@ const Sidebar = () => {
                 ))}
             </nav>
 
-            {/* Logout */}
+            {/* Footer with Profile & Logout */}
             <div className="sidebar-footer">
+                <NavLink
+                    to={profileRoute}
+                    className={({ isActive }) => `sidebar-link profile-sidebar-btn ${isActive ? 'active' : ''}`}
+                >
+                    <span className="sidebar-link-icon"><FiUser /></span>
+                    <AnimatePresence>
+                        {!collapsed && (
+                            <motion.span
+                                className="sidebar-link-label"
+                                initial={{ opacity: 0, width: 0 }}
+                                animate={{ opacity: 1, width: 'auto' }}
+                                exit={{ opacity: 0, width: 0 }}
+                            >
+                                Profile & Security
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
+                </NavLink>
+
                 <button className="sidebar-link logout-btn" onClick={handleLogout}>
                     <span className="sidebar-link-icon"><FiLogOut /></span>
                     <AnimatePresence>

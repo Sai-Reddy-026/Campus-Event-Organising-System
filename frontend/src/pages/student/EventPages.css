@@ -1,153 +1,273 @@
-/* ═══ Event Pages Shared Styles ═══ */
+/* ─── Premium Event Pages ────────────────────────────────── */
 
 .page-container {
-    padding: 24px;
-    max-width: 1200px;
+    padding: 32px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .page-header {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
 
 .page-header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: 800;
     color: var(--text-primary);
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
 }
 
 .page-header p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .back-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-card);
-    color: var(--text-secondary);
-    font-size: 0.82rem;
-    font-weight: 500;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    background: rgba(99, 102, 241, 0.05);
+    color: var(--primary-600);
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    margin-bottom: 12px;
-    transition: all 0.2s ease;
+    margin-bottom: 24px;
+    transition: all var(--transition-bounce);
 }
 
 .back-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    background: var(--primary-500);
+    color: white;
+    border-color: transparent;
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-/* Module Navigation Cards (Hackathons/Games main page) */
+/* Module Navigation Cards */
 .module-cards-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 32px;
 }
 
 .module-nav-card {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 32px 28px;
+    padding: 40px 32px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-bounce);
+    box-shadow: var(--glass-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.module-nav-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .module-nav-card:hover {
-    border-color: var(--accent);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.module-nav-card:hover::before {
+    opacity: 1;
 }
 
 .module-nav-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
+    width: 88px;
+    height: 88px;
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     color: #fff;
+    font-size: 32px;
+    position: relative;
+    z-index: 1;
 }
 
 .our-college-icon {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+    box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.8);
 }
 
 .other-college-icon {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+    background: linear-gradient(135deg, #a855f7, #7e22ce);
+    box-shadow: 0 12px 30px -10px rgba(168, 85, 247, 0.8);
 }
 
 .module-nav-content {
     flex: 1;
+    z-index: 1;
 }
 
 .module-nav-content h2 {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
 }
 
 .module-nav-content p {
-    font-size: 0.88rem;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.module-nav-arrow {
+    color: var(--primary-500);
+    font-size: 24px;
+    transition: all var(--transition-bounce);
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    z-index: 1;
+}
+
+.module-nav-card:hover .module-nav-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ─── Celebrations Page Specifics ─── */
+.thunder-card {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(245, 158, 11, 0.05));
+    transition: all var(--transition-bounce);
+}
+
+[data-theme="dark"] .thunder-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(245, 158, 11, 0.08));
+}
+
+.thunder-card-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 40px;
+}
+
+.thunder-emoji {
+    font-size: 48px;
+    filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.4));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.thunder-card-content h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thunder-card-content p {
+    font-size: 16px;
     color: var(--text-secondary);
     line-height: 1.5;
 }
 
-.module-nav-arrow {
-    color: var(--text-secondary);
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+.thunder-arrow {
+    margin-left: auto;
+    font-size: 28px;
+    color: #f59e0b;
+    opacity: 0.5;
+    transition: all var(--transition-bounce);
 }
 
-.module-nav-card:hover .module-nav-arrow {
-    color: var(--accent);
-    transform: translateX(4px);
+.thunder-card:hover .thunder-arrow {
+    opacity: 1;
+    transform: translateX(8px);
 }
 
-/* Card Grid (Event listing sub-pages) */
-.card-grid {
+.activity-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-/* Dual Module Layout (legacy, keep for celebrations) */
-.dual-module-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
+    margin-bottom: 40px;
 }
 
-.event-module {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 24px;
+.activity-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-bounce);
 }
 
-.module-title {
-    font-size: 1.2rem;
+.activity-emoji {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.activity-card h3 {
+    font-size: 18px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 8px;
 }
 
-.empty-text {
-    text-align: center;
+.activity-card p {
+    font-size: 14px;
     color: var(--text-secondary);
-    padding: 40px 20px;
-    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Card Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
 }
 
 /* Empty State */
@@ -157,72 +277,62 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
     color: var(--text-secondary);
-    gap: 12px;
+    gap: 16px;
+    background: var(--glass-bg);
+    border-radius: var(--radius-xl);
+    border: 1px dashed var(--border-color);
 }
 
 .empty-state h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
 .empty-state p {
-    font-size: 0.88rem;
-    max-width: 300px;
+    font-size: 15px;
+    max-width: 400px;
+    line-height: 1.6;
 }
 
-/* Loading */
-.loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-    gap: 16px;
-    color: var(--text-secondary);
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--border-color);
-    border-top: 3px solid var(--accent);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Responsive */
 @media (max-width: 768px) {
     .module-cards-layout {
         grid-template-columns: 1fr;
     }
 
     .module-nav-card {
-        padding: 24px 20px;
+        padding: 32px 24px;
+        flex-direction: column;
+        text-align: center;
     }
 
-    .module-nav-icon {
-        width: 60px;
-        height: 60px;
+    .module-nav-arrow {
+        transform: rotate(90deg) translateY(-10px) !important;
+    }
+
+    .module-nav-card:hover .module-nav-arrow {
+        transform: rotate(90deg) translateY(0) !important;
     }
 
     .card-grid {
         grid-template-columns: 1fr;
     }
 
-    .dual-module-layout {
-        grid-template-columns: 1fr;
+    .thunder-card-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+        gap: 16px;
     }
 
-    .page-header h1 {
-        font-size: 1.4rem;
+    .thunder-arrow {
+        margin-left: 0;
+        transform: rotate(90deg);
+    }
+
+    .thunder-card:hover .thunder-arrow {
+        transform: rotate(90deg) translateY(8px);
     }
 }

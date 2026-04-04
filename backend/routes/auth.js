@@ -72,4 +72,45 @@ router.get('/me', isAuthenticated, async (req, res) => {
     }
 });
 
+// PUT /api/auth/profile - Update user profile
+router.put('/profile', isAuthenticated, async (req, res) => {
+    try {
+        const { name, phone } = req.body;
+        const user = await User.findById(req.user.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        if (name) user.name = name;
+        if (phone) user.phone = phone;
+
+        await user.save();
+        res.json({ message: 'Profile updated successfully', user: { name: user.name, phone: user.phone } });
+    } catch (error) {
+        console.error('Update profile error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// POST /api/auth/change-password - Change user password
+router.post('/change-password', isAuthenticated, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const user = await User.findById(req.user.id).select('+password');
+
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        // Since passwords are plain text in the current DB mock
+        if (user.password !== currentPassword) {
+            return res.status(400).json({ message: 'Incorrect current password' });
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Change password error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 module.exports = router;

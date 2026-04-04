@@ -12,6 +12,9 @@ import DashboardLayout from './components/layout/DashboardLayout';
 // Auth Pages
 import Login from './pages/auth/Login';
 
+// Shared Pages
+import ProfilePage from './pages/shared/ProfilePage';
+
 // Student Pages
 import StudentDashboard from './pages/student/StudentDashboard';
 import Hackathons from './pages/student/Hackathons';
@@ -26,7 +29,6 @@ import StudentCalendar from './pages/student/StudentCalendar';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminEvents from './pages/admin/AdminEvents';
 import AdminApprovals from './pages/admin/AdminApprovals';
-import AdminAnalytics from './pages/admin/AdminAnalytics';
 
 const App = () => {
     return (
@@ -66,6 +68,7 @@ const App = () => {
                             <Route path="celebrations" element={<Celebrations />} />
                             <Route path="letters" element={<Letters />} />
                             <Route path="calendar" element={<StudentCalendar />} />
+                            <Route path="profile" element={<ProfilePage />} />
                         </Route>
 
                         {/* Admin Routes */}
@@ -77,7 +80,7 @@ const App = () => {
                             <Route path="dashboard" element={<AdminDashboard />} />
                             <Route path="events" element={<AdminEvents />} />
                             <Route path="approvals" element={<AdminApprovals />} />
-                            <Route path="analytics" element={<AdminAnalytics />} />
+                            <Route path="profile" element={<ProfilePage />} />
                         </Route>
 
                         {/* Default */}

@@ -4,13 +4,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import api from '../../services/api';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement } from 'chart.js';
-import { Bar, Pie, Line } from 'react-chartjs-2';
 import { FiUsers, FiCalendar, FiCheckCircle, FiClock, FiXCircle, FiAlertCircle } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import './AdminDashboard.css';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement);
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
@@ -18,65 +14,18 @@ const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transiti
 const AdminDashboard = () => {
     const [stats, setStats] = useState(null);
     const [pending, setPending] = useState([]);
-    const [barData, setBarData] = useState(null);
-    const [pieData, setPieData] = useState(null);
-    const [lineData, setLineData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAll = async () => {
             try {
-                const [statsRes, pendingRes, barRes, pieRes, lineRes] = await Promise.all([
+                const [statsRes, pendingRes] = await Promise.all([
                     api.get('/analytics/stats'),
-                    api.get('/registrations/pending'),
-                    api.get('/analytics/event-registrations'),
-                    api.get('/analytics/category-distribution'),
-                    api.get('/analytics/monthly-growth')
+                    api.get('/registrations/pending')
                 ]);
 
                 setStats(statsRes.data);
                 setPending(pendingRes.data.registrations || []);
-
-                // Bar chart
-                const bar = barRes.data.data || [];
-                setBarData({
-                    labels: bar.map(d => d.title?.substring(0, 15)),
-                    datasets: [{
-                        label: 'Registrations',
-                        data: bar.map(d => d.registrations),
-                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                        borderRadius: 6,
-                        borderSkipped: false
-                    }]
-                });
-
-                // Pie chart
-                const pie = pieRes.data.data || [];
-                const colors = { hackathon: '#3b82f6', game: '#10b981', celebration: '#8b5cf6' };
-                setPieData({
-                    labels: pie.map(d => d._id),
-                    datasets: [{
-                        data: pie.map(d => d.count),
-                        backgroundColor: pie.map(d => colors[d._id] || '#94a3b8'),
-                        borderWidth: 0
-                    }]
-                });
-
-                // Line chart
-                const line = lineRes.data.data || [];
-                setLineData({
-                    labels: line.map(d => d.month),
-                    datasets: [{
-                        label: 'Monthly Registrations',
-                        data: line.map(d => d.registrations),
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 5,
-                        pointBackgroundColor: '#3b82f6'
-                    }]
-                });
             } catch (err) {
                 console.error('Dashboard error:', err);
             } finally {
@@ -110,17 +59,11 @@ const AdminDashboard = () => {
         return <div className="loading-container"><div className="spinner"></div><p>Loading dashboard...</p></div>;
     }
 
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 12 } } } }
-    };
-
     return (
         <motion.div className="page-container" variants={container} initial="hidden" animate="show">
             <div className="page-header">
                 <h1>Admin Dashboard</h1>
-                <p>Manage events, approvals, and view analytics</p>
+                <p>Manage events and approvals</p>
             </div>
 
             {/* Stats Cards */}
@@ -191,30 +134,6 @@ const AdminDashboard = () => {
                     </div>
                 )}
             </motion.div>
-
-            {/* Charts Grid */}
-            <div className="charts-grid">
-                <motion.div className="glass-card chart-card" variants={item}>
-                    <h3 className="card-title">📊 Event Registrations</h3>
-                    <div className="chart-container">
-                        {barData && <Bar data={barData} options={chartOptions} />}
-                    </div>
-                </motion.div>
-
-                <motion.div className="glass-card chart-card" variants={item}>
-                    <h3 className="card-title">🥧 Event Categories</h3>
-                    <div className="chart-container pie-container">
-                        {pieData && <Pie data={pieData} options={chartOptions} />}
-                    </div>
-                </motion.div>
-
-                <motion.div className="glass-card chart-card chart-wide" variants={item}>
-                    <h3 className="card-title">📈 Monthly Growth</h3>
-                    <div className="chart-container">
-                        {lineData && <Line data={lineData} options={chartOptions} />}
-                    </div>
-                </motion.div>
-            </div>
         </motion.div>
     );
 };
